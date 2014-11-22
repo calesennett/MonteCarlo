@@ -30,7 +30,8 @@ main =  do
                              , vol=0.5
                              , drift=0.1
                              }
-            trials  = 10000
+            trials  = 5000
+        putStrLn "Running simulation..."
         allPaths <- sequence $ pricePaths option (stock option) trials
         let averages = map mean allPaths
             payoff  = mean $ calcPayoffs option averages
@@ -79,8 +80,16 @@ genPricePath
                     let path = (stock:nextStep)
                     return path
 
-nextPrice option stock e = stock + (drift o) * stock * (deltaT o) + (vol o) * stock * e * sqrt (deltaT o)
-                           where o = option
+nextPrice
+    :: Option
+    -> Double
+    -> Double
+    -> Double
+nextPrice
+    option
+    stock
+    e = stock + (drift o) * stock * (deltaT o) + (vol o) * stock * e * sqrt (deltaT o)
+        where o = option
 
 payoffCall
     :: Double
