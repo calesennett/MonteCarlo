@@ -20,7 +20,8 @@ data Option = Option { optionType :: String
 deltaT
     :: Option
     -> Double
-deltaT option = (time option) / 365
+deltaT
+    option = (time option) / 365
 
 main =  do
         let option  = Option { optionType="call"
