@@ -1,4 +1,4 @@
-module MonteCarlo.Test where
+module MonteCarlo.Tests where
 
 import           MonteCarlo hiding (main)
 import           Test.Hspec
