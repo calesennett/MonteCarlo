@@ -1,6 +1,6 @@
-module Test.MonteCarlo where
+module MonteCarlo.Test where
 
-import           MonteCarlo
+import           MonteCarlo hiding (main)
 import           Test.Hspec
 
 main =  hspec $ do
@@ -19,23 +19,23 @@ main =  hspec $ do
             it "returns correct call payout" $ do
                 let stock  = 31.25
                     strike = 29.00
-                payoffCall stock strike `shouldBe` 2.25
+                payoffCall strike stock `shouldBe` 2.25
 
             it "computes worthless payoff" $ do
                 let stock  = 31.25
                     strike = 35.00
-                payoffCall stock strike `shouldBe` 0.0
+                payoffCall strike stock `shouldBe` 0.0
 
         describe "payoffPut" $ do
             it "returns correct put payout" $ do
                 let stock  = 31.25
                     strike = 35.00
-                payoffPut stock strike `shouldBe` 3.75
+                payoffPut strike stock `shouldBe` 3.75
 
             it "computes worthless payoff" $ do
                 let stock  = 31.25
                     strike = 30.00
-                payoffPut stock strike `shouldBe` 0.0
+                payoffPut strike stock `shouldBe` 0.0
 
         describe "genPricePath" $ do
             it "computes correct number of steps" $ do
@@ -58,8 +58,8 @@ main =  hspec $ do
                                , vol=0.5
                                , drift=0.1
                                }
-                    trials = 10000
-                length (pricePaths o (stock o) trials) `shouldBe` 10000
+                    trials = 1000
+                length (pricePaths o (stock o) trials) `shouldBe` 1000
 within
     :: Double
     -> Double

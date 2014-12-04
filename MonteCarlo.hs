@@ -1,10 +1,11 @@
 module MonteCarlo
-    ( genPricePath
-    , pricePaths
-    , deltaT
-    , payoffCall
+    ( payoffCall
     , payoffPut
+    , genPricePath
+    , pricePaths
+    , main
     , Option (..)
+    , deltaT
     ) where
 
 import           Data.Random.Normal
@@ -36,7 +37,7 @@ main =  do
         allPaths <- sequence $ pricePaths option (stock option) trials
         let averages = map mean allPaths
             payoff  = mean $ calcPayoffs option averages
-            discounted = payoff / (1.0731)**(time option)
+            discounted = payoff / (1.07)**(time option)
         print discounted
 
 calcPayoffs
